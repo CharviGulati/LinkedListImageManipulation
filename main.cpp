@@ -6,40 +6,37 @@
 #include <iostream>
 #include "gridlist.h"
 
+
 using namespace std;
 
 // Block tests
-
 void TestBlockFlipHorizontal();
+
 void TestBlockFlipVertical();
+
 void TestBlockAvgLuminance();
 
 // GridList tests
-//void TestCopy();
-//
-//void TestInsertBack();
-//
+void TestCopy();
+
+void TestInsertBack();
+
 void TestFlipHorizontal();
-//
-//void TestFlipVertical();
-//
-//void TestPrintASCIIfy();
 
+void TestFlipVertical();
 
+void TestPrintASCIIfy();
 
 int main() {
-
     TestBlockFlipHorizontal();
     TestBlockFlipVertical();
     TestBlockAvgLuminance();
 
-//    TestInsertBack();
-//    TestCopy();
+    TestInsertBack();
+    TestCopy();
     TestFlipHorizontal();
-//    TestFlipVertical();
-//    TestPrintASCIIfy();
-
-
+    TestFlipVertical();
+    TestPrintASCIIfy();
 
 #ifdef _WIN32
     system("pause");
@@ -61,7 +58,6 @@ void TestBlockFlipHorizontal() {
     cout << "Leaving TestBlockFlipHorizontal..." << endl;
 }
 
-
 void TestBlockFlipVertical() {
     cout << "Entered TestBlockFlipVertical... " << endl;
     PNG checker8x8;
@@ -75,7 +71,6 @@ void TestBlockFlipVertical() {
     checker8x8_fv.writeToFile("images/checker8x8_fv.png");
     cout << "Leaving TestBlockFlipHorizontal..." << endl;
 }
-
 
 void TestBlockAvgLuminance() {
     cout << "Entered TestBlockAvgLuminance... " << endl;
@@ -97,36 +92,33 @@ void TestBlockAvgLuminance() {
     cout << "Leaving TestBlockAvgLuminance..." << endl;
 }
 
+void TestInsertBack() {
+    cout << "Entered TestInsertBack... " << endl;
+    PNG checker8x8;
+    checker8x8.readFromFile("images/checker8x8.png");
+    Block b_red, b_green, b_blue, b_white, b_all;
+    b_red.Build(checker8x8, 0, 0, 4);
+    b_green.Build(checker8x8, 4, 0, 4);
+    b_blue.Build(checker8x8, 0, 4, 4);
+    b_white.Build(checker8x8, 4, 4, 4);
 
+    GridList gl; // note that this will not have any dimx or dimy set
 
-//void TestInsertBack() {
-//    cout << "Entered TestInsertBack... " << endl;
-//    PNG checker8x8;
-//    checker8x8.readFromFile("images/checker8x8.png");
-//    Block b_red, b_green, b_blue, b_white, b_all;
-//    b_red.Build(checker8x8, 0, 0, 4);
-//    b_green.Build(checker8x8, 4, 0, 4);
-//    b_blue.Build(checker8x8, 0, 4, 4);
-//    b_white.Build(checker8x8, 4, 4, 4);
-//
-//    GridList gl; // note that this will not have any dimx or dimy set
-//
-//    // insert the first block and test
-//    gl.InsertBack(b_red);
-//    if (gl.GetNorthWest() == NULL || gl.GetSouthEast() == NULL)
-//        cout << "Corner pointers null after insertion of first Block." << endl;
-//    else if (gl.GetNorthWest() != gl.GetSouthEast())
-//        cout << "Corner pointers not equal after insertion of first Block." << endl;
-//
-//    // insert the second block and test
-//    gl.InsertBack(b_green);
-//    if (gl.GetNorthWest() == gl.GetSouthEast())
-//        cout << "Corner pointers are equal after insertion of second Block." << endl;
-//
-//    cout << "Leaving TestInsertBack... " << endl;
-//}
+    // insert the first block and test
+    gl.InsertBack(b_red);
+    if (gl.GetNorthWest() == NULL || gl.GetSouthEast() == NULL)
+        cout << "Corner pointers null after insertion of first Block." << endl;
+    else if (gl.GetNorthWest() != gl.GetSouthEast())
+        cout << "Corner pointers not equal after insertion of first Block." << endl;
 
-/*
+    // insert the second block and test
+    gl.InsertBack(b_green);
+    if (gl.GetNorthWest() == gl.GetSouthEast())
+        cout << "Corner pointers are equal after insertion of second Block." << endl;
+
+    cout << "Leaving TestInsertBack... " << endl;
+}
+
 void TestCopy() {
     cout << "Entered TestCopy... " << endl;
     PNG checker8x8;
@@ -151,8 +143,6 @@ void TestCopy() {
 
     cout << "Leaving TestCopy... " << endl;
 }
-*/
-
 
 void TestFlipHorizontal() {
     cout << "Entered TestFlipHorizontal... " << endl;
@@ -192,7 +182,6 @@ void TestFlipHorizontal() {
     cout << "Leaving TestFlipHorizontal... " << endl;
 }
 
-/*
 void TestFlipVertical() {
     cout << "Entered TestFlipVertical... " << endl;
     PNG rt;
@@ -222,7 +211,7 @@ void TestFlipVertical() {
 
     if (vflipNW != origSW || vflipSE != origNE)
         cout << "Flipped corners not matching to original corresponding corners." << endl;
-    if (copylist.GetNorthWest()->data == origNEBlock || copylist.GetSouthEast()->data == origSWBlock)
+    if (origlist.GetNorthWest()->data == origNEBlock || origlist.GetSouthEast()->data == origSWBlock)
         cout << "Pixel data in blocks not flipped";
 
     PNG vflipoutput = origlist.Render();
@@ -249,4 +238,3 @@ void TestPrintASCIIfy() {
 
     cout << pkm_s << "\nLeaving TestPrintASCIIfy... " << endl;
 }
- */
